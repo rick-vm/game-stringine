@@ -17,7 +17,7 @@ export class Grid extends CoordTransformer {
     return this._grid[this.index(vec)] || '';
   }
 
-  public set(vec: Vec, value: string): string {
+  public set(vec: Vec, value: string | undefined): string {
     if (this.inbounds(vec) && value) {
       const val = this._grid[this.index(vec)]!;
       this._grid[this.index(vec)] = value;
@@ -49,8 +49,7 @@ export class Grid extends CoordTransformer {
     for (let x = 0; x < map.width; ++x) {
       for (let y = 0; y < map.height; ++y) {
         const curPos = vec(x, y);
-        const str = map.at(curPos);
-        if (str) this.set(curPos, str);
+        this.set(curPos, map.at(curPos));
       }
     }
   }

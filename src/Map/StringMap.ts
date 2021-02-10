@@ -1,7 +1,7 @@
 import { Vec } from '../Vec/Vec.js';
-import { CartesianCoordTransformer } from '../Vec/CartesianCoordTransformer.js';
+import { CoordTransformer } from '../Vec/CoordTransformer.js';
 
-export class StringMap extends CartesianCoordTransformer {
+export class StringMap extends CoordTransformer {
   private readonly _map: (string | undefined)[];
 
   constructor(width: number, height: number, map: (string | undefined)[]) {

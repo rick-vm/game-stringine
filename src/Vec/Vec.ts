@@ -169,6 +169,7 @@ export class Vec {
     return Vec.divide(vec, length);
   }
 
+  public static readonly VEC0 = new Vec(0, 0);
   public static readonly VEC1 = new Vec(1, 1);
   public static readonly VEC2 = new Vec(2, 2);
   public static readonly VEC5 = new Vec(5, 5);

@@ -1,7 +1,8 @@
-import { CoordTransformer } from '../Vec/CoordTransformer.js';
-import { Vec } from '../Vec/Vec.js';
+import { Vec, vec } from '../Vec/Vec.js';
+import { CartesianCoordTransformer } from '../Vec/CartesianCoordTransformer.js';
+import { StringMap } from '../Map/StringMap.js';
 
-export class CartesianGrid extends CoordTransformer {
+export class CartesianGrid extends CartesianCoordTransformer {
   private readonly _background: string;
   private readonly _grid: string[];
 
@@ -16,8 +17,8 @@ export class CartesianGrid extends CoordTransformer {
     return this._grid[this.index(vec)] || '';
   }
 
-  public set(vec: Vec, value: string): string {
-    if (this.inbounds(vec)) {
+  public set(vec: Vec, value: string | undefined): string {
+    if (this.inbounds(vec) && value) {
       const val = this._grid[this.index(vec)]!;
       this._grid[this.index(vec)] = value;
       return val;
@@ -40,7 +41,17 @@ export class CartesianGrid extends CoordTransformer {
 
   public render(): string {
     const rows: string[] = [];
-    for (let i = 0; i < this._grid.length; i += this._width) rows.push(this._grid.slice(i, i + this._width).join(''));
+    for (let i = 0; i < this._grid.length; i += this.width) rows.push(this._grid.slice(i, i + this.width).join(''));
     return rows.join('\n');
+  }
+
+  public drawStringMap(map: StringMap): void {
+    for (let x = 0; x < map.width; ++x) {
+      for (let y = 0; y < map.height; ++y) {
+        console.log(vec(x, y), map.at(vec(x, y)));
+        const curPos = vec(x, y);
+        this.set(curPos, map.at(curPos));
+      }
+    }
   }
 }
