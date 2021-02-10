@@ -54,8 +54,28 @@ export class CoordTransformer {
     this._center = new Vec(width, height);
   }
 
-  public transform(vec: Vec): Vec {
-    const transformed = Vec.add(vec, this._center);
+  /**
+   * Transforms from a cartesian plane coordinate to a pixel plane coordinate 
+   */
+  public tf(vec: Vec): Vec {
+    const transformed = Vec.clone(this._center);
+    transformed.x += vec.x;
+    transformed.y -= vec.y;
     return transformed;
+  }
+
+  /**
+   * Transforms from a cartesian plane coordinate to a pixel plane coordinate and calculates the index for the vector for a 1d pixel array
+   */
+  public index_tf(vec: Vec): number {
+    const transformed = this.tf(vec);
+    return this._width * transformed.y + transformed.x;
+  }
+
+  /**
+   * Calculates the index for the vector for a 1d pixel array
+   */
+  public index(vec: Vec): number {
+    return this._width * vec.y + vec.x;
   }
 }
