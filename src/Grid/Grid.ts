@@ -1,52 +1,9 @@
 import { Vec } from '../Vec/Vec.js';
 
-export class Grid {
-  private readonly _width: number;
-  private readonly _height: number;
-  private readonly _background: string;
-  private readonly _grid: string[];
-
-  constructor(width: number, height: number, background: string) {
-    this._width = width;
-    this._height = height;
-    this._background = background;
-    this._grid = new Array<string>(width * height);
-    this._grid.fill(background);
-  }
-
-  public at(x: number, y: number): string {
-    return this._grid[y * this._width] || '';
-  }
-
-  public inBounds(x: number, y: number): boolean {
-    return x >= 0 || x < this._width || y >= 0 || y < this._height;
-  }
-
-  public set(vec: Vec, value: string): string {
-    if (this.inBounds(vec.x, vec.y)) {
-      const val = this._grid[this.index(vec)]!;
-      this._grid[this.index(vec)] = value;
-      return val;
-    } else {
-      return '';
-    }
-  }
-
-  private index(vec: Vec): number {
-    return vec.y * this._width + vec.x;
-  }
-
-  public reset(): string[] {
-    const prevFrame = this._grid;
-    this._grid.fill(this._background);
-    return prevFrame;
-  }
-}
-
 export class CoordTransformer {
-  private readonly _width: number;
-  private readonly _height: number;
-  private readonly _center: Vec;
+  protected readonly _width: number;
+  protected readonly _height: number;
+  protected readonly _center: Vec;
 
   constructor(width: number, height: number) {
     this._width = width;
@@ -77,5 +34,108 @@ export class CoordTransformer {
    */
   public index(vec: Vec): number {
     return this._width * vec.y + vec.x;
+  }
+
+  /**
+   * Asserts wether the vector is in bounds of the specified width and length
+   */
+  public inbounds(vec: Vec): boolean {
+    return vec.x >= 0 || vec.x < this._width || vec.y >= 0 || vec.y < this._height;
+  }
+
+  /**
+   * Transforms the vector to cartesian coordinate plane and asserts wether the vector is in bounds of the specified width and length
+   */
+  public inbounds_tf(vec: Vec): boolean {
+    const transformed = this.tf(vec);
+    return transformed.x >= 0 || transformed.x < this._width || transformed.y >= 0 || transformed.y < this._height;
+  }
+}
+
+export class CartesianGrid extends CoordTransformer {
+  private readonly _background: string;
+  private readonly _grid: string[];
+
+  constructor(width: number, height: number, background: string) {
+    super(width, height);
+    this._background = background;
+    this._grid = new Array<string>(width * height);
+    this._grid.fill(background);
+  }
+
+  public at(vec: Vec): string {
+    return this._grid[this.index_tf(vec)] || '';
+  }
+
+  public set(vec: Vec, value: string): string {
+    if (this.inbounds_tf(vec)) {
+      const val = this._grid[this.index_tf(vec)]!;
+      this._grid[this.index_tf(vec)] = value;
+      return val;
+    } else {
+      return '';
+    }
+  }
+
+  public reset(): string[] {
+    const prevFrame = this._grid;
+    this._grid.fill(this._background);
+    return prevFrame;
+  }
+
+  public fill(val = this._background): string[] {
+    const prevFrame = this._grid;
+    this._grid.fill(val);
+    return prevFrame;
+  }
+
+  public render(): string {
+    const rows: string[] = [];
+    for (let i = 0; i < (this._grid.length - this._width); i += this._width) rows.push(this._grid.slice(i, i + this._width).join(''));
+    return rows.join('\n');
+  }
+}
+
+export class Grid extends CoordTransformer {
+  private readonly _background: string;
+  private readonly _grid: string[];
+
+  constructor(width: number, height: number, background: string) {
+    super(width, height);
+    this._background = background;
+    this._grid = new Array<string>(width * height);
+    this._grid.fill(background);
+  }
+
+  public at(vec: Vec): string {
+    return this._grid[this.index(vec)] || '';
+  }
+
+  public set(vec: Vec, value: string): string {
+    if (this.inbounds_tf(vec)) {
+      const val = this._grid[this.index(vec)]!;
+      this._grid[this.index(vec)] = value;
+      return val;
+    } else {
+      return '';
+    }
+  }
+
+  public reset(): string[] {
+    const prevFrame = this._grid;
+    this._grid.fill(this._background);
+    return prevFrame;
+  }
+
+  public fill(val = this._background): string[] {
+    const prevFrame = this._grid;
+    this._grid.fill(val);
+    return prevFrame;
+  }
+
+  public render(): string {
+    const rows: string[] = [];
+    for (let i = 0; i < (this._grid.length - this._width); i += this._width) rows.push(this._grid.slice(i, i + this._width).join(''));
+    return rows.join('\n');
   }
 }
