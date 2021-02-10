@@ -145,3 +145,5 @@ export class Vec {
   public static readonly VEC5 = new Vec(5, 5);
   public static readonly VEC10 = new Vec(10, 10);
 }
+
+export const vec = (x: number, y: number): Vec => new Vec(x, y);

@@ -1,5 +1,3 @@
-import { CartesianGrid } from '../index.js';
+import { Grid, CoordTransformer, CartesianGrid, vec } from '../index.js';
 
-const grid = new CartesianGrid(4, 4);
-
-console.log(grid.render());
+const transformer = new CoordTransformer(5, 5);
