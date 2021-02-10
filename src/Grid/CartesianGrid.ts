@@ -1,4 +1,4 @@
-import { CoordTransformer } from './CoordTransformer.js';
+import { CoordTransformer } from '../Vec/CoordTransformer.js';
 import { Vec } from '../Vec/Vec.js';
 
 export class CartesianGrid extends CoordTransformer {
@@ -13,13 +13,13 @@ export class CartesianGrid extends CoordTransformer {
   }
 
   public at(vec: Vec): string {
-    return this._grid[this.index_tf(vec)] || '';
+    return this._grid[this.index(vec)] || '';
   }
 
   public set(vec: Vec, value: string): string {
-    if (this.inbounds_tf(vec)) {
-      const val = this._grid[this.index_tf(vec)]!;
-      this._grid[this.index_tf(vec)] = value;
+    if (this.inbounds(vec)) {
+      const val = this._grid[this.index(vec)]!;
+      this._grid[this.index(vec)] = value;
       return val;
     } else {
       return '';

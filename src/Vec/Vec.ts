@@ -1,4 +1,3 @@
-
 export class Vec {
   public x: number;
   public y: number;
@@ -161,8 +160,8 @@ export class Vec {
     return new Vec(Math.ceil(vec.x), Math.ceil(vec.y));
   }
 
-  public static distance(vec1: Vec, vec2: Vec): Vec {
-    return new Vec(vec2.x - vec1.x, vec2.y - vec1.y);
+  public static distance(vec1: Vec, vec2: Vec): number {
+    return Math.sqrt(Vec.sub(vec2, vec1).power().sum());
   }
 
   public static normal(vec: Vec): Vec {

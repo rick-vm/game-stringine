@@ -1,5 +1,6 @@
 import { Vec } from '../Vec/Vec.js';
-import { CoordTransformer } from './CoordTransformer.js';
+import { CoordTransformer } from '../Vec/CoordTransformer.js';
+import { StringMap } from '../Map/StringMap.js';
 
 export class Grid extends CoordTransformer {
   private readonly _background: string;
@@ -17,7 +18,7 @@ export class Grid extends CoordTransformer {
   }
 
   public set(vec: Vec, value: string): string {
-    if (this.inbounds_tf(vec)) {
+    if (this.inbounds(vec)) {
       const val = this._grid[this.index(vec)]!;
       this._grid[this.index(vec)] = value;
       return val;
@@ -40,7 +41,15 @@ export class Grid extends CoordTransformer {
 
   public render(): string {
     const rows: string[] = [];
-    for (let i = 0; i < this._grid.length; i += this._width) rows.push(this._grid.slice(i, i + this._width).join(''));
+    for (let i = 0; i < this._grid.length; i += this.width) rows.push(this._grid.slice(i, i + this.width).join(''));
     return rows.join('\n');
+  }
+
+  public drawMap(map: StringMap): void {
+    for (let x = 0; x < map.width; ++x) {
+      for (let y = 0; y < map.height; ++y) {
+
+      }
+    }
   }
 }
