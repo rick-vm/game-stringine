@@ -1,4 +1,4 @@
-import { Vec } from '../Vec/Vec.js';
+import { Vec, vec } from '../Vec/Vec.js';
 import { CoordTransformer } from '../Vec/CoordTransformer.js';
 import { StringMap } from '../Map/StringMap.js';
 
@@ -18,7 +18,7 @@ export class Grid extends CoordTransformer {
   }
 
   public set(vec: Vec, value: string): string {
-    if (this.inbounds(vec)) {
+    if (this.inbounds(vec) && value) {
       const val = this._grid[this.index(vec)]!;
       this._grid[this.index(vec)] = value;
       return val;
@@ -45,10 +45,12 @@ export class Grid extends CoordTransformer {
     return rows.join('\n');
   }
 
-  public drawMap(map: StringMap): void {
+  public drawStringMap(map: StringMap): void {
     for (let x = 0; x < map.width; ++x) {
       for (let y = 0; y < map.height; ++y) {
-
+        const curPos = vec(x, y);
+        const str = map.at(curPos);
+        if (str) this.set(curPos, str);
       }
     }
   }
