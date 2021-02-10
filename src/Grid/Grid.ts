@@ -56,7 +56,7 @@ export class CartesianGrid extends CoordTransformer {
   private readonly _background: string;
   private readonly _grid: string[];
 
-  constructor(width: number, height: number, background: string) {
+  constructor(width: number, height: number, background = '⬛') {
     super(width, height);
     this._background = background;
     this._grid = new Array<string>(width * height);
@@ -91,7 +91,7 @@ export class CartesianGrid extends CoordTransformer {
 
   public render(): string {
     const rows: string[] = [];
-    for (let i = 0; i < (this._grid.length - this._width); i += this._width) rows.push(this._grid.slice(i, i + this._width).join(''));
+    for (let i = 0; i < this._grid.length; i += this._width) rows.push(this._grid.slice(i, i + this._width).join(''));
     return rows.join('\n');
   }
 }
@@ -100,7 +100,7 @@ export class Grid extends CoordTransformer {
   private readonly _background: string;
   private readonly _grid: string[];
 
-  constructor(width: number, height: number, background: string) {
+  constructor(width: number, height: number, background = '⬛') {
     super(width, height);
     this._background = background;
     this._grid = new Array<string>(width * height);
@@ -135,7 +135,7 @@ export class Grid extends CoordTransformer {
 
   public render(): string {
     const rows: string[] = [];
-    for (let i = 0; i < (this._grid.length - this._width); i += this._width) rows.push(this._grid.slice(i, i + this._width).join(''));
+    for (let i = 0; i < this._grid.length; i += this._width) rows.push(this._grid.slice(i, i + this._width).join(''));
     return rows.join('\n');
   }
 }
