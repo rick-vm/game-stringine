@@ -43,33 +43,4 @@ export class CoordTransformer {
         return transformed;
     }
 }
-const flags = [
-    'Discord Employee',
-    'Partnered Server Owner',
-    'HypeSquad Events',
-    'Bug Hunter Level 1',
-    '',
-    '',
-    'House Bravery',
-    'House Brilliance',
-    'House Balance',
-    'Early Supporter',
-    'Team User',
-    '',
-    'System',
-    '',
-    'Bug Hunter Level 2',
-    '',
-    'Verified Bot',
-    'Early Verified Bot Developer'
-];
-const userFlagArray = [];
-// a random bitfield btw, so right now you might see empty entries in the array but with regular discord users with valid bitfields you won't see that
-const userFlags = 219087; // <- is 0b110101011111001111 in binary btw, the bitfield of the user flags
-for (let i = 0; i < 18; ++i) {
-    // if the bitfield has the bit enabled push to the user flag array
-    if (userFlags & (1 << i))
-        userFlagArray.push(flags[i]);
-}
-console.log(userFlagArray);
 //# sourceMappingURL=Grid.js.map
