@@ -1,3 +1,7 @@
 import { Grid, CoordTransformer, CartesianGrid, vec } from '../index.js';
 
-const transformer = new CoordTransformer(5, 5);
+const grid = new CartesianGrid(4, 4);
+
+console.log(grid.index_tf(vec(1, 0)));
+
+console.log(grid.render());

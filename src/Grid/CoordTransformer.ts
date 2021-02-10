@@ -8,7 +8,7 @@ export class CoordTransformer {
   constructor(width: number, height: number) {
     this._width = width;
     this._height = height;
-    this._center = new Vec(width / 2, height / 2);
+    this._center = new Vec((width - 1) / 2, (height - 1) / 2);
   }
 
   /**
@@ -25,15 +25,16 @@ export class CoordTransformer {
    * Transforms from a cartesian plane coordinate to a pixel plane coordinate and calculates the index for the vector for a 1d pixel array
    */
   public index_tf(vec: Vec): number {
-    const transformed = this.tf(vec);
-    return Math.round(this._width * transformed.y + transformed.x);
+    const transformed = this.tf(vec).round();
+    return this._width * transformed.y + transformed.x;
   }
 
   /**
    * Calculates the index for the vector for a 1d pixel array
    */
   public index(vec: Vec): number {
-    return Math.round(this._width * vec.y + vec.x);
+    const round = Vec.round(vec);
+    return this._width * round.y + round.x;
   }
 
   /**

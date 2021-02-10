@@ -76,6 +76,24 @@ export class Vec {
     return this;
   }
 
+  public round(): this {
+    this.x = Math.round(this.x);
+    this.y = Math.round(this.y);
+    return this;
+  }
+
+  public floor(): this {
+    this.x = Math.floor(this.x);
+    this.y = Math.floor(this.y);
+    return this;
+  }
+
+  public ceil(): this {
+    this.x = Math.ceil(this.x);
+    this.y = Math.ceil(this.y);
+    return this;
+  }
+
   get length(): number {
     return Math.sqrt(Vec.power(this).sum());
   }
@@ -129,6 +147,18 @@ export class Vec {
 
   public static power(vec: Vec, num = 2): Vec {
     return new Vec(vec.x ** num, vec.y ** num);
+  }
+
+  public static round(vec: Vec): Vec {
+    return new Vec(Math.round(vec.x), Math.round(vec.y));
+  }
+
+  public static floor(vec: Vec): Vec {
+    return new Vec(Math.floor(vec.x), Math.floor(vec.y));
+  }
+
+  public static ceil(vec: Vec): Vec {
+    return new Vec(Math.ceil(vec.x), Math.ceil(vec.y));
   }
 
   public static distance(vec1: Vec, vec2: Vec): Vec {
