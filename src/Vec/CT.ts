@@ -1,6 +1,6 @@
 import { Vec } from './Vec.js';
 
-export class CoordTransformer {
+export class CT {
   public readonly width: number;
   public readonly height: number;
 
@@ -19,7 +19,7 @@ export class CoordTransformer {
   /**
    * Asserts wether the vector is in bounds of the specified width and length
    */
-  public inbounds(vec: Vec): boolean {
+  public inBounds(vec: Vec): boolean {
     return !(vec.x < 0 || vec.x >= this.width || vec.y < 0 || vec.y >= this.height);
   }
 }

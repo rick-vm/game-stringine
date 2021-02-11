@@ -1,8 +1,8 @@
 import { Vec, vec } from '../Vec/Vec.js';
-import { CartesianCoordTransformer } from '../Vec/CartesianCoordTransformer.js';
+import { CartesianCT } from '../Vec/CartesianCT.js';
 import { StringMap } from '../Map/StringMap.js';
 
-export class CartesianGrid extends CartesianCoordTransformer {
+export class CartesianGrid extends CartesianCT {
   private readonly _background: string;
   private readonly _grid: string[];
 
@@ -18,7 +18,7 @@ export class CartesianGrid extends CartesianCoordTransformer {
   }
 
   public set(vec: Vec, value: string | undefined): string {
-    if (this.inbounds(vec) && value) {
+    if (this.inBounds(vec) && value) {
       const val = this._grid[this.index(vec)]!;
       this._grid[this.index(vec)] = value;
       return val;
@@ -47,7 +47,7 @@ export class CartesianGrid extends CartesianCoordTransformer {
 
   public drawStringMap(map: StringMap): void {
     for (let x = 0; x < map.width; ++x) {
-      for (let y = 0; y < map.height; ++y) {
+      for (let y = 0; y > -map.height; --y) {
         console.log(vec(x, y), map.at(vec(x, y)));
         const curPos = vec(x, y);
         this.set(curPos, map.at(curPos));

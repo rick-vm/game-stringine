@@ -1,5 +1,5 @@
 import { Vec } from '../Vec/Vec.js';
-import { CoordTransformer } from '../Vec/CoordTransformer.js';
+import { TLCartesianCT } from '../Vec/TLCartesianCT.js';
 
 export class StringMap extends CoordTransformer {
   private readonly _map: (string | undefined)[];
