@@ -18,7 +18,7 @@ export class Grid extends CT {
   }
 
   public set(vec: Vec, value: string | undefined): string {
-    if (this._inBounds(vec) && value) {
+    if (this.inBounds(vec) && value) {
       const val = this._grid[this.index(vec)]!;
       this._grid[this.index(vec)] = value;
       return val;
@@ -44,12 +44,11 @@ export class Grid extends CT {
     for (let i = 0; i < this._grid.length; i += this.width) rows.push(this._grid.slice(i, i + this.width).join(''));
     return rows.join('\n');
   }
-  
-  public drawStringMap(map: StringMap): void {
+
+  public drawStringMap(map: StringMap, loc: Vec): void {
     for (let x = 0; x < map.width; ++x) {
       for (let y = 0; y > -map.height; --y) {
-        console.log(vec(x, y), map.at(vec(x, y)));
-        const curPos = vec(x, y);
+        const curPos = vec(x, y).add(loc);
         this.set(curPos, map.at(curPos));
       }
     }

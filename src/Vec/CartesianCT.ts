@@ -1,6 +1,6 @@
 import { Vec } from './Vec.js';
 
-export class CartesianC {
+export class CartesianCT {
   public readonly width: number;
   public readonly height: number;
   protected readonly _origin: Vec;
@@ -26,7 +26,7 @@ export class CartesianC {
    */
   public index(vec: Vec): number {
     vec = this.tf(vec);
-    return this.width * transformed.y + transformed.x;
+    return this.width * vec.y + vec.x;
   }
 
   /**

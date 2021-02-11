@@ -1,7 +1,7 @@
 import { Vec } from '../Vec/Vec.js';
 import { TLCartesianCT } from '../Vec/TLCartesianCT.js';
 
-export class StringMap extends CoordTransformer {
+export class StringMap extends TLCartesianCT {
   private readonly _map: (string | undefined)[];
 
   constructor(width: number, height: number, map: (string | undefined)[]) {

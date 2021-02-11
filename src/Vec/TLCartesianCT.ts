@@ -1,6 +1,6 @@
 import { Vec } from './Vec.js';
 
-export class CartesianCT {
+export class TLCartesianCT {
   public readonly width: number;
   public readonly height: number;
   protected readonly _origin: Vec;
