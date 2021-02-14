@@ -46,10 +46,11 @@ export class CartesianGrid extends CartesianCT {
   }
 
   public drawStringMap(map: StringMap, loc: Vec): void {
-    for (let y = 0; y > -map.height; --y) {
+    const curPos = vec(0, 0);
+    for (; curPos.y > -map.height; --curPos.y) {
       for (let x = 0; x < map.width; ++x) {
-        const curPos = vec(x, y).add(loc);
-        this.set(curPos, map.at(curPos));
+        const pos = Vec.add(curPos, loc);
+        this.set(pos, map.at(pos));
       }
     }
   }
