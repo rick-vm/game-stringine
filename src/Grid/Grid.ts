@@ -46,10 +46,10 @@ export class Grid extends CT {
   }
 
   public drawStringMap(map: StringMap, loc: Vec): void {
-    for (let x = 0; x < map.width; ++x) {
-      for (let y = 0; y > -map.height; --y) {
-        const curPos = vec(x, y).add(loc);
-        this.set(curPos, map.at(curPos));
+    for (let y = 0; y > -map.height; --y) {
+      for (let x = 0; x < map.width; ++x) {
+        const curPos = vec(x, y);
+        this.set(Vec.add(curPos, loc), map.at(curPos));
       }
     }
   }
