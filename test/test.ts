@@ -14,4 +14,4 @@ writeFile('./test/output.txt', grid.render(), () => '');
 console.log('\x1b[1m===============================================\n', '\x1b[0m');
 console.log('\x1b[1mOutput: \x1b[36mtest/output.txt\n', '\x1b[0m');
 console.log('\x1b[1mOutputted from: \x1b[36mtest/test.ts\n', '\x1b[0m');
-console.log('\x1b[1m===============================================\n', '\x1b[0m'); 
+console.log('\x1b[1m===============================================\n', '\x1b[0m');
