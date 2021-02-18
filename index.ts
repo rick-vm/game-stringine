@@ -1,14 +1,14 @@
-import * as Pawn from './src/Actor/Pawn.js';
+import * as Pawn from './oldsrc/Actor/Pawn.js';
 
-import * as Grid from './src/Grid/Grid.js';
-import * as CartesianGrid from './src/Grid/CartesianGrid.js';
+import * as Grid from './oldsrc/Grid/Grid.js';
+import * as CartesianGrid from './oldsrc/Grid/CartesianGrid.js';
 
-import * as StringMap from './src/Map/StringMap.js';
+import * as StringMap from './oldsrc/Map/StringMap.js';
 
-import * as CartesianCT from './src/Vec/CartesianCT.js';
-import * as CT from './src/Vec/CT.js';
-import * as TLCartesianCT from './src/Vec/TLCartesianCT.js';
-import * as Vec from './src/Vec/Vec.js';
+import * as CartesianCT from './oldsrc/Vec/CartesianCT.js';
+import * as CT from './oldsrc/Vec/CT.js';
+import * as TLCartesianCT from './oldsrc/Vec/TLCartesianCT.js';
+import * as Vec from './oldsrc/Vec/Vec.js';
 
 export default {
   ...Pawn,
@@ -21,14 +21,14 @@ export default {
   ...Vec
 };
 
-export * from './src/Actor/Pawn.js';
+export * from './oldsrc/Actor/Pawn.js';
 
-export * from './src/Grid/Grid.js';
-export * from './src/Grid/CartesianGrid.js';
+export * from './oldsrc/Grid/Grid.js';
+export * from './oldsrc/Grid/CartesianGrid.js';
 
-export * from './src/Map/StringMap.js';
+export * from './oldsrc/Map/StringMap.js';
 
-export * from './src/Vec/CartesianCT.js';
-export * from './src/Vec/CT.js';
-export * from './src/Vec/TLCartesianCT.js';
-export * from './src/Vec/Vec.js';
+export * from './oldsrc/Vec/CartesianCT.js';
+export * from './oldsrc/Vec/CT.js';
+export * from './oldsrc/Vec/TLCartesianCT.js';
+export * from './oldsrc/Vec/Vec.js';
