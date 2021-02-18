@@ -6,7 +6,7 @@ export interface CTOptions {
 
 export interface TransformOptions {
   x: number,
-    y: number
+  y: number
 }
 
 export class CT {
