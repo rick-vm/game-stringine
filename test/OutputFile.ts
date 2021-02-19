@@ -1,4 +1,4 @@
-import { PathLike, createWriteStream, WriteStream } from "fs";
+import { PathLike, createWriteStream, WriteStream } from 'fs';
 
 export default class OutputFile {
   private readonly _writeStream: WriteStream;

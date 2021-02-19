@@ -18,8 +18,8 @@ export class CT {
 
   constructor(
     width: number,
-    height: number, 
-    { origin = new Vec(width / 2, height / 2) }: CTOptions = { origin: new Vec(width / 2, height / 2) }
+    height: number,
+    { origin = new Vec((width - 1) / 2, (height - 1) / 2) }: CTOptions = { origin: new Vec((width - 1) / 2, (height - 1) / 2) }
   ) {
     this._width = width;
     this._height = height;

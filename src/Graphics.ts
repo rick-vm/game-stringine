@@ -1,16 +1,47 @@
-import { Vec, vector } from './Vec.js';
+import { Vec } from './Vec.js';
 import { CT } from './CoordTransformer.js';
+import { Drawable } from './Drawables/Drawable.js';
+
+export interface GraphicsOptions {
+  background: string
+}
+
+export interface RenderOptions {
+  foo: string
+}
 
 export class Graphics extends CT {
-  constructor(width: number, height: number) {
+  private _pixels: string[];
+  private readonly _background: string[];
+
+  constructor(width: number, height: number, { background = '⬛' }: GraphicsOptions = { background: '⬛' }) {
     super(width, height);
-  }
-  
-  public at(vec: Vec): string {
-    
+    this._pixels = new Array<string>(width * height).fill(background);
+    this._background = new Array<string>(width * height).fill(background);
   }
 
-  public set(vec: Vec, val: string): string {
-
+  public at(vec: Vec): string | undefined {
+    return this._pixels[this.index(vec)];
   }
+
+  public set(vec: Vec, val: string): string | undefined {
+    const i = this.index(vec);
+    const old = this._pixels[i];
+    this._pixels[i] = val;
+    return old;
+  }
+
+  public render(): string {
+    const lines: string[] = [];
+    for (let i = 0; i < this._pixels.length; i += this._width) {
+      lines.push(this._pixels.slice(i, i + this._width).join(''));
+    }
+    return lines.join('\n');
+  }
+
+  public reset(): void {
+    this._pixels = [...this._background];
+  }
+
+  public draw(drawable: )
 }
