@@ -10,8 +10,8 @@ export class Vec {
   public static clone(vec: Vec): Vec {
     return new Vec(vec.x, vec.y);
   }
-  
-  public clone(): this {
+
+  public clone(): Vec {
     return new Vec(this.x, this.y);
   }
 
@@ -178,7 +178,7 @@ export class Vec {
     vec1.x = vec2.x;
     vec2.x = x;
   }
-  
+
   public static swapy(vec1: Vec, vec2: Vec): void {
     const y = vec1.y;
     vec1.y = vec2.y;
