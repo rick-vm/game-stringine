@@ -3,25 +3,35 @@ import { Vec } from '../../Vec.js';
 import { Graphics } from '../../Graphics.js';
 
 export class Rect extends Shape {
-  private readonly _vec1: Vec;
-  private readonly _vec2: Vec;
+  private _from: Vec;
+  private _to: Vec;
 
-  constructor(vec1: Vec, vec2: Vec,) {
+  constructor(from: Vec, to: Vec,) {
     super();
-    this._vec1 = vec1.clone();
-    this._vec2 = vec2.clone();
+    this._from = from.clone();
+    this._to = to.clone();
 
-    if (vec1.x > vec2.x) Vec.swapx(this._vec1, this._vec2);
-    if (vec1.y < vec2.y) Vec.swapy(this._vec1, this._vec2);
+    if (from.x > to.x) Vec.swapx(this._from, this._to);
+    if (from.y < to.y) Vec.swapy(this._from, this._to);
   }
 
-  get vecs(): [Vec, Vec] {
-    return [this._vec1, this._vec2];
+  get from(): Vec { return this._from; }
+  set from(from: Vec) {
+    this._from = from.clone();
+    if (from.x > this._to.x) Vec.swapx(this._from, this._to);
+    if (from.y < this._to.y) Vec.swapy(this._from, this._to);
+  }
+
+  get to(): Vec { return this.to; }
+  set to(to: Vec) {
+    this._from = to.clone();
+    if (this._from.x > to.x) Vec.swapx(this._from, this._to);
+    if (this._from.y < to.y) Vec.swapy(this._from, this._to);
   }
 
   public draw(gfx: Graphics, val?: string): void {
-    for (let x = this._vec1.x; x <= this._vec2.x; ++x) {
-      for (let y = this._vec1.y; y >= this._vec2.y; --y) {
+    for (let x = this._from.x; x <= this._to.x; ++x) {
+      for (let y = this._from.y; y >= this._to.y; --y) {
         gfx.set(new Vec(x, y), val);
       }
     }
