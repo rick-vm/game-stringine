@@ -1,6 +1,7 @@
 import { Vec } from './Vec.js';
 import { CT } from './CoordTransformer.js';
 import { Drawable } from './Drawables/Drawable.js';
+import { Shape } from './Drawables/Shape.js';
 
 export interface GraphicsOptions {
   background: string
@@ -24,10 +25,10 @@ export class Graphics extends CT {
     return this._pixels[this.index(vec)];
   }
 
-  public set(vec: Vec, val: string): string | undefined {
+  public set(vec: Vec, val?: string): string | undefined {
     const i = this.index(vec);
     const old = this._pixels[i];
-    this._pixels[i] = val;
+    if (val) this._pixels[i] = val;
     return old;
   }
 
@@ -43,5 +44,7 @@ export class Graphics extends CT {
     this._pixels = [...this._background];
   }
 
-  public draw(drawable: )
+  public drawShape(shapeOrDrawable: Shape | Drawable, val?: string): void {
+    shapeOrDrawable.draw(this, val);
+  }
 }
