@@ -10,6 +10,10 @@ export class Vec {
   public static clone(vec: Vec): Vec {
     return new Vec(vec.x, vec.y);
   }
+  
+  public clone(): this {
+    return new Vec(this.x, this.y);
+  }
 
   public sum(): number {
     return this.x + this.y;
@@ -169,11 +173,23 @@ export class Vec {
     return Vec.divide(vec, length);
   }
 
-  public static readonly VEC0 = new Vec(0, 0);
-  public static readonly VEC1 = new Vec(1, 1);
-  public static readonly VEC2 = new Vec(2, 2);
-  public static readonly VEC5 = new Vec(5, 5);
-  public static readonly VEC10 = new Vec(10, 10);
+  public static swapx(vec1: Vec, vec2: Vec): void {
+    const x = vec1.x;
+    vec1.x = vec2.x;
+    vec2.x = x;
+  }
+  
+  public static swapy(vec1: Vec, vec2: Vec): void {
+    const y = vec1.y;
+    vec1.y = vec2.y;
+    vec2.y = y;
+  }
+
+  public static readonly VEC0 = Object.freeze(new Vec(0, 0));
+  public static readonly VEC1 = Object.freeze(new Vec(1, 1));
+  public static readonly VEC2 = Object.freeze(new Vec(2, 2));
+  public static readonly VEC5 = Object.freeze(new Vec(5, 5));
+  public static readonly VEC10 = Object.freeze(new Vec(10, 10));
 }
 
 export const vector = (x: number, y: number): Vec => new Vec(x, y);
