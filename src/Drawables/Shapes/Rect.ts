@@ -29,7 +29,7 @@ export class Rect extends Shape {
     if (this._from.y < to.y) Vec.swapy(this._from, this._to);
   }
 
-  public draw(gfx: Graphics, val?: string): void {
+  public draw(gfx: Graphics, val: string | undefined): void {
     for (let x = this._from.x; x <= this._to.x; ++x) {
       for (let y = this._from.y; y >= this._to.y; --y) {
         gfx.set(new Vec(x, y), val);

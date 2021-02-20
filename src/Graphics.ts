@@ -25,7 +25,7 @@ export class Graphics extends CT {
     return this._pixels[this.index(vec)];
   }
 
-  public set(vec: Vec, val?: string): string | undefined {
+  public set(vec: Vec, val: string | undefined): string | undefined {
     const i = this.index(vec);
     const old = this._pixels[i];
     if (val) this._pixels[i] = val;
@@ -44,7 +44,7 @@ export class Graphics extends CT {
     this._pixels = [...this._background];
   }
 
-  public drawShape(shapeOrDrawable: Shape | Drawable, val?: string): void {
+  public drawShape(shapeOrDrawable: Shape | Drawable, val: string | undefined): void {
     shapeOrDrawable.draw(this, val);
   }
 }
