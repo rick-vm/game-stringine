@@ -44,7 +44,7 @@ export class Graphics extends CT {
     this._pixels = [...this._background];
   }
 
-  public drawShape(shapeOrDrawable: Shape | Drawable, val: string | undefined): void {
+  public draw(shapeOrDrawable: Shape | Drawable, val?: string): void {
     shapeOrDrawable.draw(this, val);
   }
 }

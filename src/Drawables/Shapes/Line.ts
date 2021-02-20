@@ -5,32 +5,34 @@ import { Graphics } from '../../Graphics.js';
 export class Line extends Shape {
   private _from: Vec;
   private _to: Vec;
-  private _dx: number;
-  private _dy: number;
-  private _sx: number;
-  private _sy: number;
-  private _err: number;
+  private _a: number;
+  private _b: number;
 
   constructor(from: Vec, to: Vec,) {
     super();
-    this._from = from.clone();
-    this._to = to.clone();
-
-    this._dx = Math.abs(from.x - to.x);
-    this._dy = Math.abs(from.y - to.y);
-    this._sx = (from.x < to.x) ? 1 : -1;
-    this._sy = (from.y < to.y) ? 1 : 0;
-    this._err = (this._dx - this._dy);
+    const lt = to.x >= from.x;
+    this._from = Vec.round(lt ? from : to);
+    this._to = Vec.round(lt ? to : from);
   }
 
   get from(): Vec { return this._from; }
   set from(from: Vec) {
-    this._from = from.clone();
+    this._from = Vec.round(from);
+    this._dx = Math.abs(from.x - this._to.x);
+    this._dy = Math.abs(from.y - this._to.y);
+    this._sx = (from.x < this._to.x) ? 1 : -1;
+    this._sy = (from.y < this._to.y) ? 1 : 0;
+    this._err = (this._dx - this._dy);
   }
 
   get to(): Vec { return this.to; }
   set to(to: Vec) {
-    this._to = to.clone();
+    this._to = Vec.round(to);
+    this._dx = Math.abs(this._from.x - to.x);
+    this._dy = Math.abs(this._from.y - to.y);
+    this._sx = (this._from.x < to.x) ? 1 : -1;
+    this._sy = (this._from.y < to.y) ? 1 : 0;
+    this._err = (this._dx - this._dy);
   }
 
   public draw(gfx: Graphics, val: string | undefined): void {
