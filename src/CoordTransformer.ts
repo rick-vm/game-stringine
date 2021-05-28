@@ -4,11 +4,6 @@ export interface CTOptions {
 	origin: Vec
 }
 
-export interface TransformOptions {
-	x: number,
-	y: number
-}
-
 export class CT {
 	protected readonly _width: number;
 	protected readonly _height: number;
@@ -24,8 +19,10 @@ export class CT {
 	) {
 		this._width = width;
 		this._height = height;
-		this._topLeft = new Vec(Math.round((height - 1) / 2), -Math.round((width - 1) / 2));
-		this._bottomRight = new Vec(-Math.round((height - 1) / 2), Math.round((width - 1) / 2));
+		const xR = Math.round((width - 1) / 2);
+		const yR = Math.round((height - 1) / 2);
+		this._topLeft = new Vec(-xR, yR);
+		this._bottomRight = new Vec(xR, -yR);
 		this._origin = Vec.round(origin);
 		this._origin_index = this._origin.y * this._width + this._origin.x;
 	}
@@ -35,7 +32,7 @@ export class CT {
 		return this._origin_index - (vec.y * this._width) + vec.x;
 	}
 
-	public tf(vec: Vec): Vec {
+	public transform(vec: Vec): Vec {
 		return new Vec(this._origin.x + vec.x, this._origin.y - vec.y);
 	}
 
