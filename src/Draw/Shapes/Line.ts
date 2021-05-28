@@ -5,9 +5,12 @@ import { Graphics } from '../../Graphics.js';
 export class Line extends Shape {
   private _from: Vec;
   private _to: Vec;
-  private _a: number;
-  private _b: number;
-  private _cached: boolean = false;
+  private _dx = Infinity;
+  private _dy = Infinity;
+  private _sx = Infinity;
+  private _sy = Infinity;
+  private _err = Infinity;
+  private _cached = false;
 
   constructor(from: Vec, to: Vec) {
     super();
@@ -29,12 +32,12 @@ export class Line extends Shape {
 
   public draw(gfx: Graphics, val: string | undefined): void {
     if (!this._cached) {
-      this._dx      = Math.abs(this._from.x - this._to.x);
-      this._dy      = Math.abs(this._from.y - this._to.y);
-      this._sx      = this._from.x < this._to.x ? 1 : -1;
-      this._sy      = this._from.y < this._to.y ? 1 : -1;
-      this._err     = this._dx - this.dy;
-      this._cached  = true;
+      this._dx = Math.abs(this._from.x - this._to.x);
+      this._dy = Math.abs(this._from.y - this._to.y);
+      this._sx = this._from.x < this._to.x ? 1 : -1;
+      this._sy = this._from.y < this._to.y ? 1 : -1;
+      this._err = this._dx - this._dy;
+      this._cached = true;
     }
     const curPos = this._from.clone();
     let err = this._err;

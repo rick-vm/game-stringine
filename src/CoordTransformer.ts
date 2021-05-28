@@ -1,44 +1,45 @@
 import { Vec } from './Vec.js';
 
 export interface CTOptions {
-  origin: Vec
+	origin: Vec
 }
 
 export interface TransformOptions {
-  x: number,
-  y: number
+	x: number,
+	y: number
 }
 
 export class CT {
-  protected readonly _width: number;
-  protected readonly _height: number;
-  private readonly _max_index: number;
-  private readonly _origin_index: number;
-  private readonly _origin: Vec;
+	protected readonly _width: number;
+	protected readonly _height: number;
+	private readonly _topLeft: Vec;
+	private readonly _bottomRight: Vec;
+	private readonly _origin_index: number;
+	private readonly _origin: Vec;
 
-  constructor(
-    width: number,
-    height: number,
-    { origin = new Vec((width - 1) / 2, (height - 1) / 2) }: CTOptions = { origin: new Vec((width - 1) / 2, (height - 1) / 2) }
-  ) {
-    this._width = width;
-    this._height = height;
-    this._max_index = width * height - 1;
-    this._origin = Vec.round(origin);
-    this._origin_index = this._origin.y * this._width + this._origin.x;
-  }
+	constructor(
+		width: number,
+		height: number,
+		{ origin = new Vec((width - 1) / 2, (height - 1) / 2) }: CTOptions = { origin: new Vec((width - 1) / 2, (height - 1) / 2) }
+	) {
+		this._width = width;
+		this._height = height;
+		this._topLeft = new Vec(Math.round((height - 1) / 2), -Math.round((width - 1) / 2));
+		this._bottomRight = new Vec(-Math.round((height - 1) / 2), Math.round((width - 1) / 2));
+		this._origin = Vec.round(origin);
+		this._origin_index = this._origin.y * this._width + this._origin.x;
+	}
 
-  public index(vec: Vec): number {
-    vec = Vec.round(vec);
-    return this._origin_index - (vec.y * this._width) + vec.x;
-  }
+	public index(vec: Vec): number {
+		vec = Vec.round(vec);
+		return this._origin_index - (vec.y * this._width) + vec.x;
+	}
 
-  public tf(vec: Vec): Vec {
-    return new Vec(this._origin.x + vec.x, this._origin.y - vec.y);
-  }
+	public tf(vec: Vec): Vec {
+		return new Vec(this._origin.x + vec.x, this._origin.y - vec.y);
+	}
 
-  public inBounds(vec: Vec): boolean {
-    const i = this._origin_index - (vec.y * this._width) + vec.x;
-    return i >= 0 && i <= this._max_index;
-  }
+	public inBounds(vec: Vec): boolean {
+		return (vec.x < this._topLeft.x || vec.x > this._bottomRight.x || vec.y < this._bottomRight.y || vec.y > this._topLeft.y);
+	}
 }

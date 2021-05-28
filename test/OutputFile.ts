@@ -1,11 +1,18 @@
 import { PathLike, createWriteStream, WriteStream } from 'fs';
 
-export default class OutputFile {
-  private readonly _writeStream: WriteStream;
-  private _outputCounter = 0;
+export interface OutputFileOptions {
+  log?: boolean;
+}
 
-  constructor(path: PathLike) {
+export default class OutputFile {
+  private _writeStream: WriteStream;
+  private _outputCounter = 0;
+  private readonly _log: boolean;
+
+  constructor(path: PathLike, { log = true }: OutputFileOptions = { log: true }) {
     this._writeStream = createWriteStream(path);
+
+    this._log = log;
 
     console.log('\x1b[1m===============================================\n', '\x1b[0m');
     console.log('\x1b[1mOutput: \x1b[36mtest/output.txt\n', '\x1b[0m');
@@ -13,9 +20,18 @@ export default class OutputFile {
   }
 
   public output(output: string | number): void {
-    console.log(output);
+    if (this._log) console.log(output);
     output = new Date() + '\n' + output;
     if (this._outputCounter > 0) output = '\n\n' + output;
+    this._writeStream.write(output);
+    this._outputCounter++;
+  }
+
+  public clearOutput(output: string | number): void {
+    if (this._log) console.log(output);
+    output = new Date() + '\n' + output;
+    if (this._outputCounter > 0) output = '\n\n' + output;
+    this._writeStream = createWriteStream(this._writeStream.path);
     this._writeStream.write(output);
     this._outputCounter++;
   }
