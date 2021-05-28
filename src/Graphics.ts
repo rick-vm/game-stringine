@@ -1,6 +1,6 @@
 import { Vec } from './Vec.js';
 import { CT } from './CoordTransformer.js';
-import { Drawable } from './Draw/Drawable.js';
+import { Drawable } from './Drawable/Drawable.js';
 
 export interface GraphicsOptions {
 	background: string
