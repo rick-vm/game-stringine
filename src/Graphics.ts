@@ -1,7 +1,6 @@
 import { Vec } from './Vec.js';
 import { CT } from './CoordTransformer.js';
 import { Drawable } from './Draw/Drawable.js';
-import { Shape } from './Draw/Shape.js';
 
 export interface GraphicsOptions {
 	background: string
@@ -45,7 +44,7 @@ export class Graphics extends CT {
 		this._pixels = [...this._background];
 	}
 
-	public draw(shapeOrDrawable: Shape | Drawable, val?: string): void {
-		shapeOrDrawable.draw(this, val);
+	public draw(drawable: Drawable): void {
+		drawable.draw(this);
 	}
 }
