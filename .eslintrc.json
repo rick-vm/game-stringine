@@ -4,8 +4,8 @@
 		"node": true
 	},
 	"extends": [
-		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended"
+		"plugin:@typescript-eslint/recommended",
+		"plugin:jsdoc/recommended"
 	],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
@@ -13,9 +13,17 @@
 		"sourceType": "module"
 	},
 	"plugins": [
-		"@typescript-eslint"
+		"@typescript-eslint",
+		"jsdoc"
 	],
 	"rules": {
+		"jsdoc/require-param-type": "off",
+		"jsdoc/require-returns-type": "off",
+		"jsdoc/require-returns-description": "off",
+		"jsdoc/require-returns": "off",
+		"require-jsdoc": "off",
+		"jsdoc/require-jsdoc": "off",
+		"jsdoc/check-tag-names": "off",
 		"indent": [
 			"error",
 			"tab"
@@ -32,6 +40,7 @@
 			"error",
 			"always"
 		],
+		"@typescript-eslint/ban-ts-comment": "off",
 		"@typescript-eslint/naming-convention": [
 			"error",
 			{
@@ -150,6 +159,45 @@
 				"leadingUnderscore": "forbid"
 			},
 			{
+				"selector": "memberLike",
+				"modifiers": [
+					"private",
+					"readonly"
+				],
+				"format": [
+					"camelCase",
+					"snake_case",
+					"UPPER_CASE"
+				],
+				"leadingUnderscore": "require"
+			},
+			{
+				"selector": "memberLike",
+				"modifiers": [
+					"protected",
+					"readonly"
+				],
+				"format": [
+					"camelCase",
+					"snake_case",
+					"UPPER_CASE"
+				],
+				"leadingUnderscore": "require"
+			},
+			{
+				"selector": "memberLike",
+				"modifiers": [
+					"public",
+					"readonly"
+				],
+				"format": [
+					"camelCase",
+					"snake_case",
+					"UPPER_CASE"
+				],
+				"leadingUnderscore": "forbid"
+			},
+			{
 				"selector": "enumMember",
 				"format": [
 					"PascalCase",
@@ -160,12 +208,13 @@
 			{
 				"selector": "typeLike",
 				"format": [
-					"PascalCase"
+					"PascalCase",
+					"snake_case"
 				],
 				"leadingUnderscore": "forbid"
 			}
 		],
-		"@typescript-eslint/no-unused-vars": "error",
+		"@typescript-eslint/no-unused-vars": "warn",
 		"@typescript-eslint/no-non-null-assertion": "off"
 	}
 }
