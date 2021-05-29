@@ -1,6 +1,6 @@
 import { Shape } from './Shape.js';
-import { Vec } from '../../Vec.js';
-import { Graphics } from '../../Graphics.js';
+import { Vec } from '../../Graphics/Vec.js';
+import { Graphics } from '../../Graphics/Graphics.js';
 
 export class Rect extends Shape {
 	private _from: Vec;
