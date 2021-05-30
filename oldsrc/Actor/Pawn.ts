@@ -6,11 +6,11 @@ export class Pawn {
   public readonly map: StringMap;
 
   constructor(map: StringMap, pos: Vec = Vec.VEC0) {
-    this._pos = pos;
-    this.map = map;
+  	this._pos = pos;
+  	this.map = map;
   }
 
   get pos(): Vec {
-    return this._pos;
+  	return this._pos;
   }
 }

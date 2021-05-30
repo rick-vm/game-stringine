@@ -10,6 +10,12 @@ export class Polygon extends Shape {
 		this.points = points;
 	}
 
+	public translate(dPos: Vec): void {
+		for (const point of this.points) {
+			point.add(dPos);
+		}
+	}
+
 	public draw(gfx: Graphics): void {
 		// add draw algorithm
 	}

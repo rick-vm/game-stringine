@@ -27,16 +27,7 @@ export class CT {
 		this._origin_index = this._origin.y * this._width + this._origin.x;
 	}
 
-	public index(loc: Vec): number {
-		loc = Vec.round(loc);
-		return this._origin_index - (loc.y * this._width) + loc.x;
-	}
-
 	public transform(loc: Vec): Vec {
 		return new Vec(this._origin.x + loc.x, this._origin.y - loc.y);
-	}
-
-	public inBounds(loc: Vec): boolean {
-		return (loc.x < this._topLeft.x || loc.x > this._bottomRight.x || loc.y < this._bottomRight.y || loc.y > this._topLeft.y);
 	}
 }

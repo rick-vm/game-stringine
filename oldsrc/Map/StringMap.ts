@@ -5,11 +5,11 @@ export class StringMap extends TLCartesianCT {
   private readonly _map: (string | undefined)[];
 
   constructor(width: number, height: number, map: (string | undefined)[]) {
-    super(width, height);
-    this._map = map;
+  	super(width, height);
+  	this._map = map;
   }
 
   public at(vec: Vec): string | undefined {
-    return this._map[this.index(vec)];
+  	return this._map[this.index(vec)];
   }
 }
