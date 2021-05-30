@@ -16,5 +16,9 @@
   },
   "scripts": {
     "test": "node build/test/index.js"
+  },
+  "dependencies": {
+    "eslint-plugin-jsdoc": "^35.1.0",
+    "jsdoc": "^3.6.7"
   }
 }
