@@ -1,22 +1,23 @@
 import { Vec } from './Vec.js';
-import { CT } from './CoordTransformer.js';
-import { Drawable } from '../Drawable/Drawable.js';
+import { HitBox } from '../Box/HitBox.js';
 
 export interface GraphicsOptions {
 	background: string
 }
 
-export class Graphics extends CT {
+export class Graphics {
 	public pixelBuffer: string[];
+	public readonly width: number;
+	public readonly height: number;
 	private readonly _background: string;
-	private readonly _bounds: [Vec, Vec];
+	private readonly _bounds: HitBox;
 
 	constructor(width: number, height: number, { background = '⬛' }: GraphicsOptions = { background: '⬛' }) {
 		super(width, height);
 
 		this.pixelBuffer = new Array<string>(width * height).fill(background);
 		this._background = background;
-		this._bounds = [new Vec(-1, -1), new Vec(width - 1, height - 1)];
+		this._bounds = new HitBox(0, 0, width - 1, height - 1);
 	}
 
 	public inBounds(loc: Vec): boolean {
