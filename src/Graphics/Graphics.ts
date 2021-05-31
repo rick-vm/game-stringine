@@ -8,8 +8,6 @@ export interface GraphicsOptions {
 
 export class Graphics extends CT {
 	public pixelBuffer: string[];
-	public width: number;
-	public height: number;
 	private readonly _background: string;
 	private readonly _bounds: [Vec, Vec];
 
@@ -18,10 +16,7 @@ export class Graphics extends CT {
 
 		this.pixelBuffer = new Array<string>(width * height).fill(background);
 		this._background = background;
-
-		const xR = Math.round((width - 1) / 2);
-		const yR = Math.round((height - 1) / 2);
-		this._bounds = [new Vec(-xR, yR), new Vec(xR, -yR)];
+		this._bounds = [new Vec(-1, -1), new Vec(width - 1, height - 1)];
 	}
 
 	public inBounds(loc: Vec): boolean {
