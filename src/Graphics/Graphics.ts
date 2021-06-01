@@ -1,5 +1,5 @@
 import { Vec } from './Vec.js';
-import { HitBox } from '../Box/HitBox.js';
+import { BoundingBox } from '../Box/BoundingBox.js';
 
 export interface GraphicsOptions {
 	background: string
@@ -9,51 +9,46 @@ export class Graphics {
 	public pixelBuffer: string[];
 	public readonly width: number;
 	public readonly height: number;
-	private readonly _background: string;
-	private readonly _bounds: HitBox;
+	public readonly background: string;
+	private readonly _bounds: BoundingBox;
 
 	constructor(width: number, height: number, { background = '⬛' }: GraphicsOptions = { background: '⬛' }) {
-		super(width, height);
-
 		this.pixelBuffer = new Array<string>(width * height).fill(background);
-		this._background = background;
-		this._bounds = new HitBox(0, 0, width - 1, height - 1);
-	}
-
-	public inBounds(loc: Vec): boolean {
-		return (loc.x < this._bounds[0].x || loc.x > this._bounds[1].x || loc.y < this._bounds[1].y || loc.y > this._bounds[0].y);
+		this.width = width;
+		this.height = height;
+		this.background = background;
+		this._bounds = new BoundingBox(0, 0, width - 1, height - 1);
 	}
 
 	private index(loc: Vec): number {
 		loc = Vec.round(loc);
-		return (loc.y * this._width) + loc.x;
+		return (loc.y * this.width) + loc.x;
+	}
+
+	private inBounds(loc: Vec): boolean {
+		return this._bounds.inBounds(loc);
 	}
 
 	public at(loc: Vec): string | undefined {
 		return this.pixelBuffer[this.index(loc)];
 	}
 
-	public set(loc: Vec, val: string | undefined): string | undefined {
+	public set(loc: Vec, val: string | undefined): void {
 		if (this.inBounds(loc)) return undefined;
 
-		const i = this.index(loc);
-		const old = this.pixelBuffer[i];
-
-		if (val) this.pixelBuffer[i] = val;
-
-		return old;
+		if (val) this.pixelBuffer[this.index(loc)] = val;
 	}
 
-	public reset(): void {
-		this.pixelBuffer = [...this._background];
+	public clearBuffer(): void {
+		this.pixelBuffer.fill(this.background);
 	}
 
 	public render(): string {
-		const lines: string[] = [];
+		let frame = '';
 
-		for (let i = 0; i < this.pixelBuffer.length; i += this._width)
-			lines.push(this.pixelBuffer.slice(i, i + this._width).join(''));
+		for (let i = 0; i < this.pixelBuffer.length; i += this.width)
+			frame += this.pixelBuffer.slice(i, i + this.width).join('') + '\n';
 
-		return lines.join('\n');
+		return frame;
 	}
 }
