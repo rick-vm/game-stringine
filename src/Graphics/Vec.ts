@@ -19,6 +19,12 @@ export class Vec {
 		return this.x + this.y;
 	}
 
+	public set(x: number, y: number): this {
+		this.x = x;
+		this.y = y;
+		return this;
+	}
+
 	public add(vector: Vec): this {
 		this.x += vector.x;
 		this.y += vector.y;
@@ -122,6 +128,15 @@ export class Vec {
 		return new Vec(vector.x ** num, vector.y ** num);
 	}
 
+	public static random(mag = 1): Vec {
+		const r = Math.random() * mag;
+		return new Vec(Math.cos(r), Math.sin(r));
+	}
+
+	public static fromAngle(angle: number, mag = 1): Vec {
+		return new Vec(Math.cos(angle) * mag, Math.sin(angle) * mag);
+	}
+
 	public static round(vector: Vec): Vec {
 		return new Vec(Math.round(vector.x), Math.round(vector.y));
 	}
@@ -134,8 +149,12 @@ export class Vec {
 		return new Vec(Math.ceil(vector.x), Math.ceil(vector.y));
 	}
 
-	public static distance(vector1: Vec, vector2: Vec): number {
+	public static dist(vector1: Vec, vector2: Vec): number {
 		return Math.sqrt(Vec.sub(vector2, vector1).pow().sum());
+	}
+
+	public static dist2(vector1: Vec, vector2: Vec): number {
+		return Vec.sub(vector2, vector1).pow().sum();
 	}
 
 	public static normal(vector: Vec): Vec {
