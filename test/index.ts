@@ -4,6 +4,7 @@ import { vec } from '../src/Graphics/Vec.js';
 import { Line } from '../src/Drawable/Shapes/Line.js';
 import { Rect } from '../src/Drawable/Shapes/Rect.js';
 
+/*
 const dim = 101;
 const halfDim = Math.round((dim - 1) / 2);
 const step = 1;
@@ -26,7 +27,7 @@ const line8 = new Line(vec(-halfDim, -halfDim), vec(-halfDim, halfDim), '🟥');
 let i = -halfDim;
 
 setInterval(() => {
-	gfx.reset();
+	gfx.clearFrame();
 
 	line1.from = vec(i, halfDim); line1.to = vec(halfDim, -i);
 	line2.from = vec(halfDim, -i); line2.to = vec(-i, -halfDim);
@@ -52,3 +53,4 @@ setInterval(() => {
 
 	of.clearOutput(gfx.render());
 }, 100);
+*/
