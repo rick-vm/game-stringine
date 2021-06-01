@@ -1,17 +1,19 @@
 import { Drawable } from '../Drawable/Drawable.js';
-import { Graphics, GraphicsOptions } from '../Graphics/Graphics.js';
+import { Graphics } from '../Graphics/Graphics.js';
 import { Vec } from '../Graphics/Vec.js';
 
-class Game extends Graphics {
-	constructor(width: number, height: number, { background = '⬛' }: GraphicsOptions = { background: '⬛' }) {
-		super(width, height, { background });
+class Game {
+  public readonly gfx: Graphics;
+  
+	constructor(gfx: Graphics) {
+		this.gfx = gfx;
 	}
 
 	public draw(drawable: Drawable | Drawable[]): void {
 		if (drawable instanceof Drawable) {
-			drawable.draw(this);
+			drawable.draw(gfx);
 		} else if (drawable instanceof Array) {
-			for (const drawableEntry of drawable) drawableEntry.draw(this);
+			for (const drawableEntry of drawable) drawableEntry.draw(gfx);
 		}
 	}
 }
