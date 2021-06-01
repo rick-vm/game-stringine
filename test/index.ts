@@ -3,6 +3,11 @@ import OutputFile from './OutputFile.js';
 import { vec } from '../src/Graphics/Vec.js';
 import { Line } from '../src/Drawable/Shapes/Line.js';
 import { Rect } from '../src/Drawable/Shapes/Rect.js';
+import { Timer } from '../src/Timer/Timer.js';
+
+const timer = new Timer();
+
+setInterval(() => console.log(timer.dt()), 100);
 
 /*
 const dim = 101;
