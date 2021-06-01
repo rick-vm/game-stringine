@@ -1,6 +1,6 @@
 import { Vec } from '../Graphics/Vec.js';
 
-export class HitBox {
+export class BoundingBox {
 	public left: number;
 	public top: number;
 	public right: number;
@@ -13,8 +13,7 @@ export class HitBox {
 		this.bottom = bottom;
 	}
 
-	public colliding(hitbox: HitBox): boolean {
-		return false;
-		// add collision detection
+	public inBounds(loc: Vec): boolean {
+		return loc.x <= this.right && loc.x >= this.left && loc.y <= this.top && loc.y >= this.bottom;
 	}
 }
