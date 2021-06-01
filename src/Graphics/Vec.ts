@@ -85,18 +85,16 @@ export class Vec {
 		return this;
 	}
 
-	get length(): number {
+	public length(): number {
 		return Math.sqrt(Vec.pow(this).sum());
 	}
 
-	get normal(): Vec {
-		const length = this.length;
-		return Vec.div(this, new Vec(length, length));
+	public normal(): Vec {
+		return Vec.div(this, this.length());
 	}
 
 	public normalize(): this {
-		const length = this.length;
-		this.divide(length);
+		this.divide(this.length());
 		return this;
 	}
 
@@ -108,20 +106,20 @@ export class Vec {
 		return new Vec(vector1.x - vector2.x, vector1.y + vector2.y);
 	}
 
-	public static div(vector1: Vec, vector2: Vec): Vec {
+	public static divide(vector1: Vec, vector2: Vec): Vec {
 		return new Vec(vector1.x / vector2.x, vector1.y / vector2.y);
 	}
 
-	public static divide(vector1: Vec, scalar: number): Vec {
+	public static div(vector1: Vec, scalar: number): Vec {
 		return new Vec(vector1.x / scalar, vector1.y / scalar);
 	}
 
-	public static mul(vector1: Vec, vector2: Vec): Vec {
+	public static multiply(vector1: Vec, vector2: Vec): Vec {
 		return new Vec(vector1.x * vector2.x, vector1.y * vector2.y);
 	}
 
-	public static multiply(vector1: Vec, num: number): Vec {
-		return new Vec(vector1.x * num, vector1.y + num);
+	public static mul(vector1: Vec, scalar: number): Vec {
+		return new Vec(vector1.x * scalar, vector1.y + scalar);
 	}
 
 	public static pow(vector: Vec, num = 2): Vec {
@@ -158,8 +156,7 @@ export class Vec {
 	}
 
 	public static normal(vector: Vec): Vec {
-		const length = vector.length;
-		return Vec.divide(vector, length);
+		return Vec.div(vector, vector.length());
 	}
 
 	public static swapx(vector1: Vec, vector2: Vec): void {
