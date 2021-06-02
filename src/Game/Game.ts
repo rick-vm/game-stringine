@@ -9,7 +9,7 @@ export class Game {
 
 	constructor(gfx: Graphics) {
 		this.gfx = gfx;
-		this._ct = new CoordTransformer(gfx.width, gfx.height);
+		this._ct = new CoordTransformer(gfx);
 	}
 
 	public draw(drawable: Drawable | Drawable[]): void {

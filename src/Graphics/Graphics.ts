@@ -51,4 +51,12 @@ export class Graphics {
 
 		return frame;
 	}
+
+	// public draw(drawable: Drawable | Drawable[]): void {
+	// 	if (drawable instanceof Drawable) {
+	// 		drawable.draw(this.gfx);
+	// 	} else if (drawable instanceof Array) {
+	// 		for (const drawableEntry of drawable) drawableEntry.draw(this.gfx);
+	// 	}
+	// }
 }

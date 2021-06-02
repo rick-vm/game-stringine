@@ -1,25 +1,31 @@
 import { Vec } from './Vec.js';
+import { Graphics } from './Graphics.js';
 
 export interface CoordTransformerOptions {
 	origin: Vec
 }
 
 export class CoordTransformer {
-	protected readonly _width: number;
-	protected readonly _height: number;
+	private readonly _gfxRef: Graphics;
 	private readonly _origin: Vec;
 
 	constructor(
-		width: number,
-		height: number,
-		{ origin = new Vec((width - 1) / 2, (height - 1) / 2) }: CoordTransformerOptions = { origin: new Vec((width - 1) / 2, (height - 1) / 2) }
+		gfx: Graphics,
+		{ origin = new Vec((gfx.width - 1) / 2, (gfx.height - 1) / 2) }: CoordTransformerOptions = { origin: new Vec((gfx.width - 1) / 2, (gfx.height - 1) / 2) }
 	) {
-		this._width = width;
-		this._height = height;
+		this._gfxRef = gfx;
 		this._origin = origin;
 	}
 
-	public transform(loc: Vec): Vec {
+	private transform(loc: Vec): Vec {
 		return new Vec(this._origin.x + loc.x, this._origin.y - loc.y);
 	}
+
+	// public draw(drawable: Drawable | Drawable[]): void {
+	// 	if (drawable instanceof Drawable) {
+	// 		drawable.draw(this.gfx);
+	// 	} else if (drawable instanceof Array) {
+	// 		for (const drawableEntry of drawable) drawableEntry.draw(this.gfx);
+	// 	}
+	// }
 }
