@@ -1,5 +1,5 @@
 import { Vec } from './Vec.js';
-import { BoundingBox } from '../Box/BoundingBox.js';
+import { BoundingBox } from '../BoundingBox/BoundingBox.js';
 
 export interface GraphicsOptions {
 	background: string
@@ -34,7 +34,7 @@ export class Graphics {
 	}
 
 	public set(loc: Vec, val: string | undefined): void {
-		if (this.inBounds(loc)) return undefined;
+		if (!this.inBounds(loc)) return undefined;
 
 		if (val) this.pixelBuffer[this.index(loc)] = val;
 	}
@@ -52,11 +52,25 @@ export class Graphics {
 		return frame;
 	}
 
-	// public draw(drawable: Drawable | Drawable[]): void {
-	// 	if (drawable instanceof Drawable) {
-	// 		drawable.draw(this.gfx);
-	// 	} else if (drawable instanceof Array) {
-	// 		for (const drawableEntry of drawable) drawableEntry.draw(this.gfx);
-	// 	}
-	// }
+	public drawLine(from: Vec, to: Vec, val: string): void {
+		const cur = from.clone();
+		const
+			dx = Math.abs(from.x - to.x),
+			dy = Math.abs(from.y - to.y),
+			sx = from.x < to.x ? 1 : -1,
+			sy = from.y < to.y ? 1 : -1;
+		let err = dx - dy;
+
+		while (cur.x !== to.x || cur.y !== to.y) {
+			this.set(cur, val);
+
+			// Bit shift for ultimate performance (same as err * 2)
+			const e2 = err >> 1;
+
+			if (e2 > -dy) { err -= dy; cur.x += sx; }
+			if (e2 < dx) { err += dx; cur.y += sy; }
+		}
+		// Solve last pixel and edge case
+		this.set(cur, val);
+	}
 }

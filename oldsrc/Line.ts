@@ -1,6 +1,6 @@
-import { Shape } from './Shape.js';
-import { Vec } from '../../Graphics/Vec.js';
-import { Graphics } from '../../Graphics/Graphics.js';
+import { Shape } from '../src/Drawable/Shapes/Shape.js';
+import { Vec } from '../src/Graphics/Vec.js';
+import { Graphics } from '../src/Graphics/Graphics.js';
 
 export class Line extends Shape {
 	private _from: Vec;

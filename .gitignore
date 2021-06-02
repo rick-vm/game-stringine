@@ -3,3 +3,5 @@ package-lock.json
 
 # ignore compiled .js
 build/
+
+# ignore 
