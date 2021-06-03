@@ -87,8 +87,7 @@ export class Graphics {
 			console.log(cur.x, cur.y, cur.x !== to.x || cur.y !== to.y);
 			this.set(cur, val);
 
-			// Bit shift for ultimate performance (same as err * 2)
-			const e2 = err >> 1;
+			const e2 = err * 2;
 
 			if (e2 > -dy) { err -= dy; cur.x += sx; }
 			if (e2 < dx) { err += dx; cur.y += sy; }
