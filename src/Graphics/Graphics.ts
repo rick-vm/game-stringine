@@ -75,21 +75,19 @@ export class Graphics {
 
 		const
 			dx = Math.abs(to.x - from.x),
-			dy = Math.abs(to.y - from.y),
+			dy = -Math.abs(to.y - from.y),
 			sx = from.x < to.x ? 1 : -1,
 			sy = from.y < to.y ? 1 : -1;
-		let err = dx - dy;
+		let err = dx + dy;
 
 		const cur = from.clone();
-		console.log(from, to, dx, dy, sx, sy, err);
 
 		while (cur.x !== to.x || cur.y !== to.y) {
-			console.log(cur.x, cur.y, cur.x !== to.x || cur.y !== to.y);
 			this.set(cur, val);
 
 			const e2 = err * 2;
 
-			if (e2 > -dy) { err -= dy; cur.x += sx; }
+			if (e2 > dy) { err += dy; cur.x += sx; }
 			if (e2 < dx) { err += dx; cur.y += sy; }
 		}
 
