@@ -2,13 +2,15 @@ import { Vec } from '../Graphics/Vec.js';
 import { Shape } from './Shape/Shape.js';
 
 export class Drawable {
-	private readonly _shape: Shape;
+	private readonly _model: Vec[];
+	private readonly _val: string;
 	private _translate: Vec;
 	private _scale: Vec;
 
 	constructor(shape: Shape) {
-		this._shape = shape;
-		this._translate = new Vec(0, 0);
+		this._model = shape.model;
+		this._val = shape.val;
+		this._translate = shape.pos.clone();
 		this._scale = new Vec(1, 1);
 	}
 
@@ -21,12 +23,12 @@ export class Drawable {
 	}
 
 	public transform(): { model: Vec[], val: string } {
-		const model = [...this._shape.model];
+		const model = [...this._model];
 
-		for (const point of model) {
-			point.mul(this._scale).add(this._translate);
+		for (const vertex of model) {
+			vertex.mul(this._scale).add(this._translate);
 		}
 
-		return { model, val: this._shape.val };
+		return { model, val: this._val };
 	}
 }

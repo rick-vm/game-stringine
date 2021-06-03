@@ -131,6 +131,10 @@ export class Vec {
 		return new Vec(Math.cos(r), Math.sin(r));
 	}
 
+	public static randomPositive(max = 1): Vec {
+		return new Vec(Math.random() * max, Math.random() * max);
+	}
+
 	public static fromAngle(angle: number, mag = 1): Vec {
 		return new Vec(Math.cos(angle) * mag, Math.sin(angle) * mag);
 	}

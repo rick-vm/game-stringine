@@ -1,6 +1,5 @@
 import { CoordTransformer } from '../Graphics/CoordTransformer.js';
 import { Graphics } from '../Graphics/Graphics.js';
-import { Vec } from '../Graphics/Vec.js';
 
 export class Game {
 	public readonly gfx: Graphics;

@@ -10,4 +10,5 @@ export abstract class Shape {
 		this.val = val;
 		this.pos = pos;
 	}
+
 }

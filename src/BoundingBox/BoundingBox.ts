@@ -16,4 +16,8 @@ export class BoundingBox {
 	public inBounds(loc: Vec): boolean {
 		return loc.x >= this.left && loc.x <= this.right && loc.y >= this.top && loc.y <= this.bottom;
 	}
+
+	public inBoundsIndependent(x: number, y: number): boolean {
+		return x >= this.left && x <= this.right && y >= this.top && y <= this.bottom;
+	}
 }
