@@ -1,14 +1,13 @@
 import { Vec } from '../Graphics/Vec.js';
+import { Shape } from './Shape/Shape.js';
 
 export class Drawable {
-	private readonly _model: Vec[];
-	public readonly val: string;
+	private readonly _shape: Shape;
 	private _translate: Vec;
 	private _scale: Vec;
 
-	constructor(model: Vec[], val: string) {
-		this._model = model;
-		this.val = val;
+	constructor(shape: Shape) {
+		this._shape = shape;
 		this._translate = new Vec(0, 0);
 		this._scale = new Vec(1, 1);
 	}
@@ -21,13 +20,13 @@ export class Drawable {
 		this._scale.mul(dScale);
 	}
 
-	public transform(): Vec[] {
-		const model = [...this._model];
+	public transform(): { model: Vec[], val: string } {
+		const model = [...this._shape.model];
 
 		for (const point of model) {
 			point.mul(this._scale).add(this._translate);
 		}
 
-		return model;
+		return { model, val: this._shape.val };
 	}
 }
